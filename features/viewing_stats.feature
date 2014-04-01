@@ -7,3 +7,8 @@ Feature: Viewing stat calulations
     Given that no stats exist
     When I display the stats report
     Then I should see that no stats are available to calculate
+
+  Scenario: Some stats exist
+    Given that some stats exist
+    When I display the stats report
+    Then I should see the calculated stats
