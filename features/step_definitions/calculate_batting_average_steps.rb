@@ -30,7 +30,7 @@ Given(/^that enough at\-bats exist for multiple players in date range$/) do
 end
 
 Then(/^calling calculate should return the most improved player$/) do
-  player_id = step "calculate best batting average"
+  player_id = @calc.calculate
   player_id.should == "aardsda02"
 end
 
@@ -48,17 +48,17 @@ end
 
 Then(/^I should see there aren't enough at-bats to calculate$/) do
   expect {
-    step "calculate best batting average"
+    @calc.calculate
   }.to raise_error(BaseballStats::Calculators::StatsMustHaveAtLeast200AtBatsError)
 end
 
 Then(/^calling calculate should return the player$/) do
-  player_id = step("calculate best batting average")
+  player_id = @calc.calculate
   player_id.should == "aardsda01"
 end
 
 Then(/^calling calculate should return the better player$/) do
-  player_id = step("calculate best batting average")
+  player_id = @calc.calculate
   # the better player has 2 hits / 200 at-bats
   # other player has 1 / 200
   player_id.should == "aardsda01"
@@ -71,15 +71,11 @@ end
 
 Then(/^calling calculate should raise NoStatsToCalculateError$/) do
   expect {
-    step "calculate best batting average"
+    @calc.calculate
   }.to raise_error(BaseballStats::Calculators::NoStatsToCalculateError)
 end
 
 #private steps
-When(/^calculate best batting average$/) do
-  @calc.calculate
-end
-
 When(/^set at-bats to (\d+)$/) do |num|
   @stats_csv.gsub!(/73,0,/, "73,#{num},")
 end
