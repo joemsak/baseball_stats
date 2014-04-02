@@ -7,3 +7,8 @@ Feature: Calculating the best improved batting average from 2009 to 2010
     Given that no stats exist
     When I create an improved batting average calculator
     Then calling calculate should raise NoStatsToCalculateError
+
+  Scenario: Stats exist for one player
+    Given that some stats exist for one player
+    When I create an improved batting average calculator
+    Then calling calculate should return the player
