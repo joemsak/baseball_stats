@@ -26,7 +26,7 @@ module BaseballStats
         players = get_players_in_date_range
         raise NoStatsFoundInDateRangeError   if players.blank?
 
-        players = minimum_stats(players)
+        players = get_players_with_minimum_stats(players)
         raise NoPlayersFoundWithMinimumStats if players.blank?
 
         players.group_by { |p| p['playerID'] }
@@ -42,7 +42,7 @@ module BaseballStats
         end
       end
 
-      def minimum_stats(players)
+      def get_players_with_minimum_stats(players)
         players.reject { |p| p['AB'] < 200 }
       end
     end
