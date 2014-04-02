@@ -1,5 +1,5 @@
-module StatsReporter
-  module StatsCalculator
+module BaseballStats
+  module Calculators
     class ImprovedBattingAverage
       attr_accessor :csv, :year
 

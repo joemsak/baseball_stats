@@ -1,5 +1,5 @@
 When(/^I display the stats report$/) do
-  @report = StatsReporter::CalculationReport.new(@stats_csv)
+  @report = BaseballStats::Report.new(@stats_csv)
   @report.display_report
 end
 

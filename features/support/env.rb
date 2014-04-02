@@ -1,1 +1,1 @@
-require 'stats_reporter'
+require 'baseball_stats'

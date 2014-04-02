@@ -36,14 +36,14 @@ When(/^I create an improved batting average calculator$/) do
   csv = @stats_csv.blank? ? '' : CSV.parse(@stats_csv,
                                            headers: true,
                                            converters: :all)
-  @calculator = StatsReporter::StatsCalculator::ImprovedBattingAverage.new(csv,
+  @calculator = BaseballStats::Calculators::ImprovedBattingAverage.new(csv,
                                                                           2010)
 end
 
 Then(/^I should see there aren't enough at-bats to calculate$/) do
   expect {
     step "calculate best batting average"
-  }.to raise_error(StatsReporter::StatsCalculator::StatsMustHaveAtLeast200AtBatsError)
+  }.to raise_error(BaseballStats::Calculators::StatsMustHaveAtLeast200AtBatsError)
 end
 
 Then(/^calling calculate should return the player$/) do
@@ -66,7 +66,7 @@ end
 Then(/^calling calculate should raise NoStatsToCalculateError$/) do
   expect {
     step "calculate best batting average"
-  }.to raise_error(StatsReporter::StatsCalculator::NoStatsToCalculateError)
+  }.to raise_error(BaseballStats::Calculators::NoStatsToCalculateError)
 end
 
 #private steps

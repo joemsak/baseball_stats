@@ -1,8 +1,8 @@
 require 'csv'
 require 'active_support/all'
 
-module StatsReporter
-  class CalculationReport
+module BaseballStats
+  class Report
     attr_accessor :message, :data_source
 
     def initialize(data_source)
