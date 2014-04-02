@@ -4,11 +4,11 @@ Then(/^calling calculate should return the player$/) do
 end
 
 When(/^I create an improved batting average calculator$/) do
-  @calculator = StatsCalculator::ImprovedBattingAverage.new(@stats_csv)
+  @calculator = StatsReporter::StatsCalculator::ImprovedBattingAverage.new(@stats_csv)
 end
 
 Then(/^calling calculate should raise NoStatsToCalculateError$/) do
   expect {
     @calculator.calculate(2009, 2010)
-  }.to raise_error(StatsCalculator::NoStatsToCalculateError)
+  }.to raise_error(StatsReporter::StatsCalculator::NoStatsToCalculateError)
 end

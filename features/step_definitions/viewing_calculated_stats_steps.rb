@@ -6,7 +6,7 @@ Given(/^that some stats exist(?: for one player)$/) do
 end
 
 When(/^I display the stats report$/) do
-  @report = CalculationReport.new(@stats_csv)
+  @report = StatsReporter::CalculationReport.new(@stats_csv)
   @report.display_report
 end
 
