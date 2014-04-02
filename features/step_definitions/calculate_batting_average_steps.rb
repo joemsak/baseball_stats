@@ -20,6 +20,13 @@ Then(/^calling calculate should return the player$/) do
   player_id.should == "aardsda01"
 end
 
+Then(/^calling calculate should return the better player$/) do
+  player_id = step("calculate 2009 to 2010")
+  # the better player has 2 hits / 200 at-bats
+  # other player has 1 / 200
+  player_id.should == "aardsda01"
+end
+
 Then(/^calling calculate should raise NoStatsToCalculateError$/) do
   expect {
     step "calculate 2009 to 2010"
@@ -32,5 +39,5 @@ When(/^calculate 2009 to 2010$/) do
 end
 
 When(/^set at-bats to (\d+)$/) do |num|
-  @stats_csv.sub!(/,0,/, ",#{num},")
+  @stats_csv.gsub!(/73,0,/, "73,#{num},")
 end

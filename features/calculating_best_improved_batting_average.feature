@@ -18,3 +18,8 @@ Feature: Calculating the best improved batting average from 2009 to 2010
     When I create an improved batting average calculator
     Then calling calculate should return the player
 
+  Scenario: Enough stats exist for multiple players
+    Given that enough at-bats exist for multiple players
+    When I create an improved batting average calculator
+    Then calling calculate should return the better player
+

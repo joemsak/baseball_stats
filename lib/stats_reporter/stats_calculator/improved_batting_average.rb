@@ -9,13 +9,17 @@ module StatsReporter
 
       def calculate(start_year, end_year)
         raise NoStatsToCalculateError if csv.blank?
-        name = "No players had enough At-Bats"
-        csv.each do |player|
-          if player['AB'] > 199
-            name = player['playerID']
-          end
+
+        best = eligible_players.max_by do |player|
+          player['H'] / player['AB'].to_f
         end
-        name
+
+        best.blank? ? "No players had enough At-Bats" : best['playerID']
+      end
+
+      private
+      def eligible_players
+        csv.to_enum.reject { |p| p['AB'] < 200 }
       end
     end
 
