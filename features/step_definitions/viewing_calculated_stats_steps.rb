@@ -1,7 +1,7 @@
 Given(/^that no stats exist$/) do
 end
 
-Given(/^that some stats exist(?: for one player)$/) do
+Given(/^that some stats exist(?: for one player)?$/) do
   @stats_csv = "aardsda01,2009,AL,SEA,73,0,0,0,0,0,0,0,0,0"
 end
 
