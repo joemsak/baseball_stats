@@ -3,8 +3,8 @@ module BaseballStats
     class ImprovedBattingAverage
       attr_accessor :csv, :year
 
-      def initialize(csv, year)
-        @csv  = csv
+      def initialize(raw_data, year)
+        @csv  = CSV.parse(raw_data, headers: true, converters: :all)
         @year = year
       end
 

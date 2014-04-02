@@ -1,4 +1,5 @@
 Given(/^that no stats exist$/) do
+  @stats_csv = ''
 end
 
 Given(/^(?:that )?some (?:stats|at-bats) exist$/) do
@@ -40,10 +41,8 @@ Given(/^that not enough at-bats exist for a batting average$/) do
 end
 
 When(/^I create an improved batting average calculator$/) do
-  csv = @stats_csv.blank? ? '' : CSV.parse(@stats_csv,
-                                           headers: true,
-                                           converters: :all)
-  @calc = BaseballStats::Calculators::ImprovedBattingAverage.new(csv, 2010)
+  @calc = BaseballStats::Calculators::ImprovedBattingAverage.new(@stats_csv,
+                                                                 2010)
 end
 
 Then(/^I should see there aren't enough at-bats to calculate$/) do

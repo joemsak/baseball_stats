@@ -1,14 +1,10 @@
-require 'csv'
-require 'active_support/all'
-require 'baseball_stats/reporters'
-
 module BaseballStats
   class Report
-    attr_accessor :message, :csv
+    attr_accessor :message
 
     def initialize(raw_data)
-      @message = ''
-      @csv     = CSV.parse(raw_data || '', headers: true, converters: :all)
+      @message  = ''
+      @raw_data = raw_data
     end
 
     def display_report
@@ -18,12 +14,20 @@ module BaseballStats
     private
     def add_improved_batting_average_to_message
       begin
-        calculator = Calculators::ImprovedBattingAverage.new(csv, 2010)
-        @message << Reports::ImprovedBattingAverage::HEADER
-        @message << "2009 to 2010: " << calculator.calculate
+        @message << improved_batting_average_reporter.header
+        @message << improved_batting_average_reporter.result
       rescue => e
         @message = e.message
       end
+    end
+
+    def improved_batting_average_reporter
+      @improved_ba_reporter ||= Reporters::ImprovedBattingAverage.new(raw_data,
+                                                                      2010)
+    end
+
+    def raw_data
+      @raw_data ||= ''
     end
   end
 end
