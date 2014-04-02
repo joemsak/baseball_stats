@@ -1,3 +1,4 @@
+require 'csv'
 require 'active_support/all'
 
 module StatsReporter
