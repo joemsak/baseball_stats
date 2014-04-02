@@ -2,36 +2,26 @@ Given(/^that no stats exist$/) do
   @stats_csv = ''
 end
 
-Given(/^(?:that )?some (?:stats|at-bats) exist$/) do
+Given(/^(?:that )?some stats exist$/) do
   @stats_csv = "playerID,yearID,league,teamID,G,AB,R,H,2B,3B,HR,RBI,SB,CS\n"
-  @stats_csv << "aardsda01,2009,AL,SEA,73,0,0,2,0,0,0,0,0,0"
-  # 01 has 2 hits
+  @stats_csv << "aardsda01,2009,AL,SEA,73,200,0,180,0,0,0,0,0,0"
+  @stats_csv << "aardsda01,2010,AL,SEA,73,200,0,180,0,0,0,0,0,0"
 end
 
-Given(/^(?:that )?enough at\-bats exist for multiple players$/) do
-  step "some at-bats exist"
-  @stats_csv << "\naardsda02,2009,AL,SEA,73,0,0,1,0,0,0,0,0,0"
-  # 02 has 1 hit
-  step "set at-bats to 200"
-  # everyone has 200 At-Bats
+Given(/^(?:that )?enough at\-bats exist for multiple players(?: in date range)?$/) do
+  step "some stats exist"
+  @stats_csv << "\naardsda02,2009,AL,SEA,73,200,0,180,0,0,0,0,0,0"
+  @stats_csv << "\naardsda02,2010,AL,SEA,73,200,0,190,0,0,0,0,0,0"
 end
 
 Given(/^that enough at\-bats exist for multiple players out of date range$/) do
   step "enough at-bats exist for multiple players"
-  @stats_csv << "\naardsda03,2007,AL,SEA,73,200,0,3,0,0,0,0,0,0"
-  # 03 has 3 hits, but is out of date range
-end
-
-Given(/^that enough at\-bats exist for multiple players in date range$/) do
-  step "enough at-bats exist for multiple players"
-  @stats_csv << "\naardsda02,2010,AL,SEA,73,200,0,2,0,0,0,0,0,0"
-  @stats_csv << "\naardsda01,2010,AL,SEA,73,200,0,2,0,0,0,0,0,0"
-  # 02 improved by 1 hit
-  # 01 did not improve, stayed the same
+  @stats_csv << "\naardsda03,2007,AL,SEA,73,200,0,198,0,0,0,0,0,0"
+  @stats_csv << "\naardsda03,2008,AL,SEA,73,200,0,199,0,0,0,0,0,0"
 end
 
 Given(/^that not enough at-bats exist for a batting average$/) do
-  step "some at-bats exist"
+  step "some stats exist"
   step "set at-bats to 199"
 end
 
@@ -56,16 +46,9 @@ Then(/^calling calculate should return the player$/) do
   player_id.should == "aardsda01"
 end
 
-Then(/^calling calculate should return the better player$/) do
+Then(/^calling calculate should return the better player(?: in the date range)?$/) do
   player_id = @calc.calculate
-  # the better player has 2 hits / 200 at-bats
-  # other player has 1 / 200
-  player_id.should == "aardsda01"
-end
-
-Then(/^calling calculate should return the better player in the date range$/) do
-  step "calling calculate should return the better player"
-  # this just so happens to be the same player in this step
+  player_id.should == "aardsda02"
 end
 
 Then(/^calling calculate should raise NoStatsToCalculateError$/) do
@@ -82,5 +65,5 @@ end
 
 #private steps
 When(/^set at-bats to (\d+)$/) do |num|
-  @stats_csv.gsub!(/73,0,/, "73,#{num},")
+  @stats_csv.gsub!(/,200,/, ",#{num},")
 end
