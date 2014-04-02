@@ -5,8 +5,7 @@ Feature: Calculating the best improved batting average from 2009 to 2010
 
   Scenario: No stats exist
     Given that no stats exist
-    When I create an improved batting average calculator
-    Then calling calculate should raise NoStatsToCalculateError
+    Then initializing the calculator should raise NoStatsToCalculateError
 
   Scenario: Stats exist, but no one has 200 At-Bats
     Given that not enough at-bats exist for a batting average

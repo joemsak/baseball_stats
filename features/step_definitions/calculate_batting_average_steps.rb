@@ -30,25 +30,25 @@ Given(/^that enough at\-bats exist for multiple players in date range$/) do
   # 01 did not improve, stayed the same
 end
 
-Then(/^calling calculate should return the most improved player$/) do
-  player_id = @calc.calculate
-  player_id.should == "aardsda02"
-end
-
 Given(/^that not enough at-bats exist for a batting average$/) do
   step "some at-bats exist"
   step "set at-bats to 199"
 end
 
-When(/^I create an improved batting average calculator$/) do
+When(/^(?:I )?create an improved batting average calculator$/) do
   @calc = BaseballStats::Calculators::ImprovedBattingAverage.new(@stats_csv,
                                                                  2010)
+end
+
+Then(/^calling calculate should return the most improved player$/) do
+  player_id = @calc.calculate
+  player_id.should == "aardsda02"
 end
 
 Then(/^I should see there aren't enough at-bats to calculate$/) do
   expect {
     @calc.calculate
-  }.to raise_error(BaseballStats::Calculators::StatsMustHaveAtLeast200AtBatsError)
+  }.to raise_error(BaseballStats::Calculators::NoPlayersFoundWithMinimumStats)
 end
 
 Then(/^calling calculate should return the player$/) do
@@ -71,6 +71,12 @@ end
 Then(/^calling calculate should raise NoStatsToCalculateError$/) do
   expect {
     @calc.calculate
+  }.to raise_error(BaseballStats::Calculators::NoStatsToCalculateError)
+end
+
+Then(/^initializing the calculator should raise NoStatsToCalculateError$/) do
+  expect {
+    step "create an improved batting average calculator"
   }.to raise_error(BaseballStats::Calculators::NoStatsToCalculateError)
 end
 

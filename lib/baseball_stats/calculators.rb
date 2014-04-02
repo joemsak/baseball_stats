@@ -9,6 +9,6 @@ module BaseballStats
     end
 
     class NoStatsFoundInDateRangeError < StandardError; end
-    class StatsMustHaveAtLeast200AtBatsError < StandardError; end
+    class NoPlayersFoundWithMinimumStats < StandardError; end
   end
 end
