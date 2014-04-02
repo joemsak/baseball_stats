@@ -1,0 +1,1 @@
+require 'stats_reporter/stats_calculator/improved_batting_average'
