@@ -8,7 +8,7 @@ Feature: Viewing stat calulations
     When I display the stats report
     Then I should see that no stats are available to calculate
 
-  Scenario: Some stats exist
-    Given that some stats exist
+  Scenario: The batting average stats exist
+    Given that enough at-bats exist for multiple players in date range
     When I display the stats report
     Then I should see the calculated stats

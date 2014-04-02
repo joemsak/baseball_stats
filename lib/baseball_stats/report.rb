@@ -3,20 +3,26 @@ require 'active_support/all'
 
 module BaseballStats
   class Report
-    attr_accessor :message, :data_source
+    attr_accessor :message, :csv
 
-    def initialize(data_source)
-      @data_source = data_source
+    def initialize(raw_data)
+      @message = ''
+      @csv     = CSV.parse(raw_data || '', headers: true, converters: :all)
     end
 
     def display_report
-      display_no_stats and return if data_source.blank?
-      @message = "Most improved batting average from 2009 to 2010:"
+      add_improved_batting_average_to_message
     end
 
     private
-    def display_no_stats
-      @message = "There are no stats to calculate."
+    def add_improved_batting_average_to_message
+      begin
+        calculator = Calculators::ImprovedBattingAverage.new(csv, 2010)
+        @message << Calculators::ImprovedBattingAverage::HEADER
+        @message << "2009 to 2010: " << calculator.calculate
+      rescue => e
+        @message = e.message
+      end
     end
   end
 end

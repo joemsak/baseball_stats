@@ -8,5 +8,6 @@ Then(/^I should see that no stats are available to calculate$/) do
 end
 
 Then(/^I should see the calculated stats$/) do
-  @report.message.should include "Most improved batting average from 2009 to 2010:"
+  @report.message.should include "Most improved batting average from"
+  @report.message.should include "2009 to 2010: aardsda02"
 end
