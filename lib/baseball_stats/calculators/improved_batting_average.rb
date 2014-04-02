@@ -24,7 +24,7 @@ module BaseballStats
       private
       def eligible_players
         players = get_players_in_date_range
-        raise NoStatsFoundInDateRangeError   if players.blank?
+        raise NoStatsFoundInDateRangeError if players.blank?
 
         players = get_players_with_minimum_stats(players)
         raise NoPlayersFoundWithMinimumStats if players.blank?
