@@ -1,0 +1,1 @@
+require 'baseball_stats/reporters/improved_batting_average'

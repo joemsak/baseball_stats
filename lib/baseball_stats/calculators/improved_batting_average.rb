@@ -1,7 +1,6 @@
 module BaseballStats
   module Calculators
     class ImprovedBattingAverage
-      HEADER = "Most improved batting average from "
       attr_accessor :csv, :year
 
       def initialize(csv, year)
