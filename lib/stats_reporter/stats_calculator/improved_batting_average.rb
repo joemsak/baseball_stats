@@ -1,13 +1,15 @@
 module StatsReporter
   module StatsCalculator
     class ImprovedBattingAverage
-      attr_accessor :csv
+      attr_accessor :csv, :start_y, :end_y
 
-      def initialize(csv)
-        @csv = csv
+      def initialize(csv, start_y, end_y)
+        @csv     = csv
+        @start_y = start_y
+        @end_y   = end_y
       end
 
-      def calculate(start_year, end_year)
+      def calculate
         raise NoStatsToCalculateError if csv.blank?
 
         best = eligible_players.max_by do |player|
@@ -19,7 +21,9 @@ module StatsReporter
 
       private
       def eligible_players
-        csv.to_enum.reject { |p| p['AB'] < 200 }
+        csv.to_enum.reject do |player|
+          player['AB'] < 200 || !player['yearID'].between?(start_y, end_y)
+        end
       end
     end
 

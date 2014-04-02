@@ -13,13 +13,13 @@ Feature: Calculating the best improved batting average from 2009 to 2010
     When I create an improved batting average calculator
     Then I should see there aren't enough at-bats to calculate
 
-  Scenario: Enough stats exist for one player
-    Given that enough at-bats exist for one player
-    When I create an improved batting average calculator
-    Then calling calculate should return the player
-
   Scenario: Enough stats exist for multiple players
     Given that enough at-bats exist for multiple players
     When I create an improved batting average calculator
     Then calling calculate should return the better player
+
+  Scenario: Enough stats exist for multiple players out of date range
+    Given that enough at-bats exist for multiple players out of date range
+    When I create an improved batting average calculator
+    Then calling calculate should return the better player in the date range
 
