@@ -16,6 +16,17 @@ Given(/^that enough at\-bats exist for multiple players out of date range$/) do
   @stats_csv << "\naardsda03,2007,AL,SEA,73,200,0,3,0,0,0,0,0,0"
 end
 
+Given(/^that enough at\-bats exist for multiple players in date range$/) do
+  step "enough at-bats exist for multiple players"
+  @stats_csv << "\naardsda02,2010,AL,SEA,73,200,0,2,0,0,0,0,0,0"
+  @stats_csv << "\naardsda01,2010,AL,SEA,73,200,0,2,0,0,0,0,0,0"
+end
+
+Then(/^calling calculate should return the most improved player$/) do
+  player_id = step "calculate best batting average"
+  player_id.should == "aardsda02"
+end
+
 Given(/^that not enough at-bats exist for a batting average$/) do
   step "some at-bats exist"
   step "set at-bats to 199"
@@ -26,13 +37,13 @@ When(/^I create an improved batting average calculator$/) do
                                            headers: true,
                                            converters: :all)
   @calculator = StatsReporter::StatsCalculator::ImprovedBattingAverage.new(csv,
-                                                                          2009,
                                                                           2010)
 end
 
 Then(/^I should see there aren't enough at-bats to calculate$/) do
-  result = step "calculate best batting average"
-  result.should == "No players had enough At-Bats"
+  expect {
+    step "calculate best batting average"
+  }.to raise_error(StatsReporter::StatsCalculator::StatsMustHaveAtLeast200AtBatsError)
 end
 
 Then(/^calling calculate should return the player$/) do
