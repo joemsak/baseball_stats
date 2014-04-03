@@ -4,22 +4,10 @@ require 'baseball_stats/calculators'
 module BaseballStats
   module Calculators
     describe ImprovedBattingAverage do
-      def build_calculator(stats, year)
-        @calculator = ImprovedBattingAverage.new(stats, year)
-      end
-
-      def assert_calculate_raised(error, stats, year)
-        build_calculator(stats, year)
-        expect {
-          @calculator.calculate
-        }.to raise_error(error)
-      end
+      include CalculatorTestHelper
+      subject { ImprovedBattingAverage }
 
       describe "#calculate" do
-        let(:stats) do
-          "playerID,yearID,league,teamID,G,AB,R,H,2B,3B,HR,RBI,SB,CS"
-        end
-
         context "when no stats exist" do
           it "raises a NoStatsToCalculateError" do
             expect {
@@ -38,13 +26,13 @@ module BaseballStats
             before { stats.gsub!(/,200,/, ',199,') }
 
             it "raises a NotEnoughStatsFoundError" do
-              assert_calculate_raised(NotEnoughStatsFoundError, stats, 2009)
+              assert_calculator_raised(NotEnoughStatsFoundError, stats, 2009)
             end
           end
 
           context "but no one is in the date range" do
             it "raises a NotEnoughStatsFoundError" do
-              assert_calculate_raised(NotEnoughStatsFoundError, stats, 2011)
+              assert_calculator_raised(NotEnoughStatsFoundError, stats, 2011)
             end
           end
 
@@ -56,7 +44,7 @@ module BaseballStats
 
             it "returns the playerID of the most improved player" do
               build_calculator(stats, 2010)
-              @calculator.calculate.should == 'aardsda02'
+              calculator.calculate.should == 'aardsda02'
             end
           end
         end
