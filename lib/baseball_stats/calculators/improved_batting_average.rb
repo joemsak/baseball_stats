@@ -17,9 +17,8 @@ module BaseballStats
 
       private
       def eligible_players
-        players = super do |player|
-          player['yearID'].between?(year - 1, year) &&
-          player['AB'] > 199
+        players = select_from_csv do |player|
+          player['yearID'].between?(year - 1, year) && player['AB'] > 199
         end
         raise NotEnoughStatsFoundError if players.size < 2
 

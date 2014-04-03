@@ -18,9 +18,8 @@ module BaseballStats
 
       private
       def eligible_players
-        super do |player|
-          player['teamID'] == team_id &&
-            player['yearID'] == year
+        select_from_csv do |player|
+          player['teamID'] == team_id && player['yearID'] == year
         end
       end
 

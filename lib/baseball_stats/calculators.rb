@@ -21,8 +21,8 @@ module BaseballStats
     class NoEligibleStatsFoundError < StandardError; end
 
     private
-    def eligible_players
-      @eligible_players ||= csv.to_enum.select do |player|
+    def select_from_csv
+      @selected_from_csv ||= csv.to_enum.select do |player|
         yield(player)
       end
     end
