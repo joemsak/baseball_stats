@@ -15,7 +15,7 @@ module BaseballStats
         }.to raise_error(error)
       end
 
-      describe "#caclulate" do
+      describe "#calculate" do
         let(:stats) do
           "playerID,yearID,league,teamID,G,AB,R,H,2B,3B,HR,RBI,SB,CS"
         end
