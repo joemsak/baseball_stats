@@ -8,7 +8,6 @@ module BaseballStats
       end
     end
 
-    class NoStatsFoundInDateRangeError < StandardError; end
-    class NoPlayersFoundWithMinimumStats < StandardError; end
+    class NotEnoughStatsFoundError < StandardError; end
   end
 end

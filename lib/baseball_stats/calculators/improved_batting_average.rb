@@ -4,9 +4,9 @@ module BaseballStats
       attr_accessor :csv, :year
 
       def initialize(raw_data, year)
-        raise NoStatsToCalculateError if raw_data.blank?
         @csv  = CSV.parse(raw_data, headers: true, converters: :all)
         @year = year
+        raise NoStatsToCalculateError if csv.blank?
       end
 
       def calculate
@@ -24,13 +24,13 @@ module BaseballStats
       private
       def eligible_players
         players = get_players_in_date_range
-        raise NoStatsFoundInDateRangeError if players.blank?
-
         players = get_players_with_minimum_stats(players)
-        raise NoPlayersFoundWithMinimumStats if players.blank?
 
-        players.group_by { |p| p['playerID'] }.reject { |_, stats| stats.size < 2 }
-        # no sense in comparing players who don't have stats in both years
+        raise NotEnoughStatsFoundError if players.size < 2
+
+        players.group_by { |p| p['playerID'] }.reject { |_, stats|
+          stats.size < 2 # no sense comparing players w/o stats in both years
+        }
       end
 
       def batting_average(stats)
