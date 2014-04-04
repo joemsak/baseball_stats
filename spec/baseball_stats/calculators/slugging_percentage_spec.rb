@@ -10,8 +10,7 @@ module BaseballStats
       describe "#calculate" do
         context "when no stats exist" do
           it "raises a NoStatsToCalculateError" do
-            assert_calculator_raised(NoStatsToCalculateError, stats,
-                                     2010, 'ANY')
+            assert_calculator_raised(NoStatsToCalculateError, 2010, 'ANY')
           end
         end
 
@@ -24,15 +23,13 @@ module BaseballStats
 
           context "but no players are found for the requested team" do
             it "raises a NoEligibleStatsFoundError" do
-              assert_calculator_raised(NoEligibleStatsFoundError, stats,
-                                       2011, 'BLA')
+              assert_calculator_raised(NoEligibleStatsFoundError, 2011, 'BLA')
             end
           end
 
           context "but no players were found for the requested year" do
             it "raises a NoEligibleStatsFoundError" do
-              assert_calculator_raised(NoEligibleStatsFoundError, stats,
-                                       2010, 'OAK')
+              assert_calculator_raised(NoEligibleStatsFoundError, 2010, 'OAK')
             end
           end
 
@@ -50,7 +47,7 @@ module BaseballStats
               # (30 + 14 + 3 + 20) / 146
               # 67 / 146 = 0.459
               #
-              build_calculator(stats, 2011, 'OAK')
+              build_calculator(2011, 'OAK')
               calculator.calculate.should == {
                 'allenbr01' => 0.356,
                 'allenbr02' => 0.459

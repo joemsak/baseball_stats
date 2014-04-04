@@ -10,7 +10,7 @@ module BaseballStats
       describe "#calculate" do
         context "when no stats exist" do
           it "raises a NoStatsToCalculateError" do
-            assert_calculator_raised(NoStatsToCalculateError, stats, 2001)
+            assert_calculator_raised(NoStatsToCalculateError, 2001)
           end
         end
 
@@ -24,13 +24,13 @@ module BaseballStats
             before { stats.gsub!(/,200,/, ',199,') }
 
             it "raises a NotEnoughStatsFoundError" do
-              assert_calculator_raised(NotEnoughStatsFoundError, stats, 2009)
+              assert_calculator_raised(NotEnoughStatsFoundError, 2009)
             end
           end
 
           context "but no one is in the date range" do
             it "raises a NotEnoughStatsFoundError" do
-              assert_calculator_raised(NotEnoughStatsFoundError, stats, 2011)
+              assert_calculator_raised(NotEnoughStatsFoundError, 2011)
             end
           end
 
@@ -41,7 +41,7 @@ module BaseballStats
             end
 
             it "returns the playerID of the most improved player" do
-              build_calculator(stats, 2010)
+              build_calculator(2010)
               calculator.calculate.should == 'aardsda02'
             end
           end

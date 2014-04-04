@@ -12,7 +12,7 @@ module BaseballStats
       subject { TripleCrownWinner }
 
       def assert_winners_for(year, id1, id2)
-        build_calculator(stats, year)
+        build_calculator(year)
         calculator.calculate.should == {
           'American League' => id1,
           'National League' => id2
@@ -22,7 +22,7 @@ module BaseballStats
       describe "#calculate" do
         context "when no stats exist" do
           it "raises a NoStatsToCalculateError" do
-            assert_calculator_raised(NoStatsToCalculateError, stats, 2011)
+            assert_calculator_raised(NoStatsToCalculateError, 2011)
           end
         end
 

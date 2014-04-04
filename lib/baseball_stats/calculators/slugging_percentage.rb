@@ -4,8 +4,8 @@ module BaseballStats
       include Calculators
       attr_accessor :team_id
 
-      def initialize(raw_data, year, team_id)
-        super(raw_data, year)
+      def initialize(year, team_id)
+        super(year)
         @team_id = team_id
       end
 

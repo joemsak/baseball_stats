@@ -18,7 +18,7 @@ module BaseballStats
 
     attr_accessor :csv, :year
 
-    def initialize(raw_data, year)
+    def initialize(year)
       @csv  = CSV.parse(raw_data, headers: true, converters: :all)
       @year = year
       raise NoStatsToCalculateError if csv.blank?
@@ -28,19 +28,36 @@ module BaseballStats
       raise "#{self.class.name} must implement #calculate"
     end
 
-    class NoStatsToCalculateError < StandardError
-      def message
-        "There are no stats to calculate."
-      end
+    private
+    def raw_data
+      BaseballStats::Report.raw_data
     end
 
-    class NotEnoughStatsFoundError < StandardError; end
-    class NoEligibleStatsFoundError < StandardError; end
-
-    private
     def select_from_csv
       @selected_from_csv ||= csv.to_enum.select do |player|
         yield(player)
+      end
+    end
+  end
+end
+
+module BaseballStats
+  module Calculators
+    class NoStatsToCalculateError < StandardError
+      def message
+        'There are no stats to calculate.'
+      end
+    end
+
+    class NotEnoughStatsFoundError < StandardError
+      def message
+        'Not enough stats were found.'
+      end
+    end
+
+    class NoEligibleStatsFoundError < StandardError
+      def message
+        'No eligible stats were found.'
       end
     end
   end
