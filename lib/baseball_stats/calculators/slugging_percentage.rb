@@ -26,7 +26,8 @@ module BaseballStats
       private
       def eligible_players
         players = select_from_csv do |player|
-          player['teamID'] == team_id && player['yearID'] == year
+          player[TEAM_ID] == team_id &&
+            player[YEAR_ID] == year
         end
         players.blank? ? raise(NoEligibleStatsFoundError) : players
       end

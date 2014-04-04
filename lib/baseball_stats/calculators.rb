@@ -13,6 +13,7 @@ module BaseballStats
     NATIONAL_LEAGUE = 'NL'
     PLAYER_ID       = 'playerID'
     RBI             = 'RBI'
+    TEAM_ID         = 'teamID'
     TRIPLES         = '3B'
     YEAR_ID         = 'yearID'
 
