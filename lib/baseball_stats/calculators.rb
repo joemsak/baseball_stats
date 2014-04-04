@@ -3,6 +3,14 @@ require 'baseball_stats/calculators/slugging_percentage'
 
 module BaseballStats
   module Calculators
+    AT_BATS   = 'AB'
+    DOUBLES   = '2B'
+    HITS      = 'H'
+    HOMERUNS  = 'HR'
+    PLAYER_ID = 'playerID'
+    TRIPLES   = '3B'
+    YEAR_ID   = 'yearID'
+
     attr_accessor :csv, :year
 
     def initialize(raw_data, year)

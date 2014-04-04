@@ -18,21 +18,21 @@ module BaseballStats
       private
       def eligible_players
         players = select_from_csv do |player|
-          player['yearID'].between?(year - 1, year) && player['AB'] > 199
+          player[YEAR_ID].between?(year - 1, year) && player[AT_BATS] > 199
         end
         raise NotEnoughStatsFoundError if players.size < 2
 
         players.sort_by { |player|
-          player['yearID']
+          player[YEAR_ID]
         }.group_by      { |player|
-          player['playerID']
+          player[PLAYER_ID]
         }.reject        { |_, stats| # no sense comparing players
           stats.size < 2             # w/o stats in both years
         }
       end
 
       def batting_average(stats)
-        stats['H'] / stats['AB'].to_f
+        stats[HITS] / stats[AT_BATS].to_f
       end
     end
   end
