@@ -17,8 +17,8 @@ module CalculatorTestHelper
   end
 
   def assert_calculator_raised(error, *args)
-    build_calculator(*args)
     expect {
+      build_calculator(*args)
       calculator.calculate
     }.to raise_error(error)
   end

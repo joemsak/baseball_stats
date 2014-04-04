@@ -10,9 +10,8 @@ module BaseballStats
       describe "#calculate" do
         context "when no stats exist" do
           it "raises a NoStatsToCalculateError" do
-            expect {
-              build_calculator(stats, 2010, 'ANY')
-            }.to raise_error(NoStatsToCalculateError)
+            assert_calculator_raised(NoStatsToCalculateError, stats,
+                                     2010, 'ANY')
           end
         end
 
