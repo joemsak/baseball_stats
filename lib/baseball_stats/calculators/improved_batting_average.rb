@@ -7,6 +7,7 @@ module BaseballStats
         players = {}
 
         eligible_players.each do |player_id, stats|
+          # this part is why we're sorting in #eligible_players
           this_year = batting_average(stats[1])
           prev_year = batting_average(stats[0])
           players[player_id] = this_year - prev_year
