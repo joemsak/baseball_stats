@@ -12,37 +12,45 @@ module BaseballStats
     end
 
     def display_report
-      report_improved_batting_average
-      report_slugging_percentage
-      report_triple_crown_winners
+      construct_message
+      $stdout.puts message
     end
 
     private
+    def construct_message
+      report_improved_batting_average
+      message << "\n"
+      report_slugging_percentage
+      message << "\n"
+      report_triple_crown_winners
+      message << "\n"
+    end
+
     def report_improved_batting_average
-      @message << improved_batting_average_reporter.header
+      message << improved_batting_average_reporter.header
       begin
-        @message << improved_batting_average_reporter.result
+        message << improved_batting_average_reporter.result
       rescue => e
-        @message << e.message
+        message << e.message
       end
     end
 
     def report_slugging_percentage
-      @message << "\n" << slugging_percentage_reporter.header
+      message << "\n" << slugging_percentage_reporter.header
       begin
-        @message << slugging_percentage_reporter.result
+        message << slugging_percentage_reporter.result
       rescue => e
-        @message << e.message
+        message << e.message
       end
     end
 
     def report_triple_crown_winners
       [2011, 2012].each do |year|
-        @message << "\n" << triple_crown_reporter(year).header
+        message << "\n" << triple_crown_reporter(year).header
         begin
-          @message << triple_crown_reporter(year).result
+          message << triple_crown_reporter(year).result << "\n"
         rescue => e
-          @message << e.message
+          message << e.message
         end
       end
     end
