@@ -34,9 +34,7 @@ module BaseballStats
       end
 
       def select_eligible_players(league)
-        eligible_players.select do |player|
-          player[LEAGUE] == league
-        end
+        eligible_players.select { |p| p[LEAGUE] == league }
       end
 
       def eligible_players
