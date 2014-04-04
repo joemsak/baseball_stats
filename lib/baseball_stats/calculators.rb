@@ -20,8 +20,7 @@ module BaseballStats
     attr_accessor :csv, :year
 
     def initialize(year)
-      @csv  = CSV.parse(raw_data, row_sep: :auto,
-                                  headers: true,
+      @csv  = CSV.parse(raw_data, headers: true,
                                   converters: :all)
       @year = year
       raise NoStatsToCalculateError if csv.blank?

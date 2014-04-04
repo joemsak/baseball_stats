@@ -8,7 +8,7 @@ module BaseballStats
 
     def initialize(raw_data)
       @message  = ''
-      self.class.raw_data = raw_data
+      self.class.raw_data = clean_data_source(raw_data)
     end
 
     def display_report
@@ -17,6 +17,10 @@ module BaseballStats
     end
 
     private
+    def clean_data_source(data)
+      data.gsub("\r", "\n").gsub("\n\n", "\n").gsub(',,', ',0,')
+    end
+
     def construct_message
       report_improved_batting_average
       message << "\n"
