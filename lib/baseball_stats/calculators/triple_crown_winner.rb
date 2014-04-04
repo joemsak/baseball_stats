@@ -33,14 +33,6 @@ module BaseballStats
         collection.max_by { |p| p[stat] }[stat] rescue 0
       end
 
-      def eligible_nl_players
-        select_eligible_players(NATIONAL_LEAGUE)
-      end
-
-      def eligible_al_players
-        select_eligible_players(AMERICAN_LEAGUE)
-      end
-
       def select_eligible_players(league)
         eligible_players.select do |player|
           player[LEAGUE] == league
