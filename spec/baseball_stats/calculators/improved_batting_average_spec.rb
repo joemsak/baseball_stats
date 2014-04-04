@@ -18,8 +18,8 @@ module BaseballStats
 
         context "when some stats exist" do
           before do
-            stats << "\naardsda01,2009,AL,SEA,73,200,0,180,0,0,0,0,0,0"
             stats << "\naardsda01,2010,AL,SEA,73,200,0,180,0,0,0,0,0,0"
+            stats << "\naardsda01,2009,AL,SEA,73,200,0,180,0,0,0,0,0,0"
           end
 
           context "but no one has 200 at-bats" do
@@ -38,8 +38,8 @@ module BaseballStats
 
           context "and there are enough to calculate a meaningful answer" do
             before do
-              stats << "\naardsda02,2009,AL,SEA,73,200,0,180,0,0,0,0,0,0"
               stats << "\naardsda02,2010,AL,SEA,73,200,0,190,0,0,0,0,0,0"
+              stats << "\naardsda02,2009,AL,SEA,73,200,0,180,0,0,0,0,0,0"
             end
 
             it "returns the playerID of the most improved player" do

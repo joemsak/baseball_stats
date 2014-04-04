@@ -22,8 +22,12 @@ module BaseballStats
         end
         raise NotEnoughStatsFoundError if players.size < 2
 
-        players.group_by { |p| p['playerID'] }.reject { |_, stats|
-          stats.size < 2 # no sense comparing players w/o stats in both years
+        players.sort_by { |player|
+          player['yearID']
+        }.group_by      { |player|
+          player['playerID']
+        }.reject        { |_, stats| # no sense comparing players
+          stats.size < 2             # w/o stats in both years
         }
       end
 
