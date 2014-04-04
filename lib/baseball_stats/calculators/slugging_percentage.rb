@@ -10,25 +10,25 @@ module BaseballStats
       end
 
       def calculate
-        raise NoEligibleStatsFoundError if eligible_players.blank?
         results = {}
         eligible_players.each do |p|
-          slugging_percentage = ((p[HITS] - p[DOUBLES] - p[TRIPLES] - p[HOMERUNS]) +
-                                 (2 * p[DOUBLES]) +
-                                 (3 * p[TRIPLES]) +
-                                 (4 * p[HOMERUNS])) / p[AT_BATS].to_f
+          slg = ((p[HITS] - p[DOUBLES] - p[TRIPLES] - p[HOMERUNS]) +
+                 (2 * p[DOUBLES]) +
+                 (3 * p[TRIPLES]) +
+                 (4 * p[HOMERUNS])) / p[AT_BATS].to_f
 
           key = p[PLAYER_ID]
-          results[key] = slugging_percentage.round(3)
+          results[key] = slg.round(3)
         end
         results
       end
 
       private
       def eligible_players
-        select_from_csv do |player|
+        players = select_from_csv do |player|
           player['teamID'] == team_id && player['yearID'] == year
         end
+        players.blank? ? raise(NoEligibleStatsFoundError) : players
       end
     end
   end
