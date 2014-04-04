@@ -1,6 +1,7 @@
 module BaseballStats
   class Report
     attr_accessor :message
+
     class << self
       attr_accessor :raw_data
     end
