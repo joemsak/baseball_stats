@@ -23,14 +23,14 @@ module BaseballStats
           end
 
           context "but no players are found for the requested team" do
-            it "raises a NoStatsFoundForTeamError" do
+            it "raises a NoEligibleStatsFoundError" do
               assert_calculator_raised(NoEligibleStatsFoundError, stats,
                                        2010, 'BLA')
             end
           end
 
           context "but no players were found for the requested year" do
-            it "raises a NoStatsFoundForYearError" do
+            it "raises a NoEligibleStatsFoundError" do
               assert_calculator_raised(NoEligibleStatsFoundError, stats,
                                        2009, 'OAK')
             end
