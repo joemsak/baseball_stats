@@ -1,15 +1,20 @@
 require 'baseball_stats/calculators/improved_batting_average'
 require 'baseball_stats/calculators/slugging_percentage'
+require 'baseball_stats/calculators/triple_crown_winner'
 
 module BaseballStats
   module Calculators
-    AT_BATS   = 'AB'
-    DOUBLES   = '2B'
-    HITS      = 'H'
-    HOMERUNS  = 'HR'
-    PLAYER_ID = 'playerID'
-    TRIPLES   = '3B'
-    YEAR_ID   = 'yearID'
+    AMERICAN_LEAGUE = 'AL'
+    AT_BATS         = 'AB'
+    DOUBLES         = '2B'
+    HITS            = 'H'
+    HOMERUNS        = 'HR'
+    LEAGUE          = 'league'
+    NATIONAL_LEAGUE = 'NL'
+    PLAYER_ID       = 'playerID'
+    RBI             = 'RBI'
+    TRIPLES         = '3B'
+    YEAR_ID         = 'yearID'
 
     attr_accessor :csv, :year
 
@@ -17,6 +22,10 @@ module BaseballStats
       @csv  = CSV.parse(raw_data, headers: true, converters: :all)
       @year = year
       raise NoStatsToCalculateError if csv.blank?
+    end
+
+    def calculate
+      raise "#{self.class.name} must implement #calculate"
     end
 
     class NoStatsToCalculateError < StandardError

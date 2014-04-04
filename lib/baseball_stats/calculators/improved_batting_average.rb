@@ -8,12 +8,16 @@ module BaseballStats
 
         eligible_players.each do |player_id, stats|
           # this part is why we're sorting in #eligible_players
-          this_year = batting_average(stats[1])
-          prev_year = batting_average(stats[0])
+          this_year = self.class.formula(stats[1])
+          prev_year = self.class.formula(stats[0])
           players[player_id] = this_year - prev_year
         end
 
         players.max_by { |_, v| v }.first
+      end
+
+      def self.formula(stats)
+        stats[HITS] / stats[AT_BATS].to_f
       end
 
       private
@@ -30,10 +34,6 @@ module BaseballStats
         }.reject        { |_, stats| # no sense comparing players
           stats.size < 2             # w/o stats in both years
         }
-      end
-
-      def batting_average(stats)
-        stats[HITS] / stats[AT_BATS].to_f
       end
     end
   end
