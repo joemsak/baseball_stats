@@ -44,7 +44,7 @@ module BaseballStats
       end
 
       def collect_and_add(key)
-        eligible_players.collect { |p| p[key]  }.reduce(:+)
+        eligible_players.collect { |p| p[key] }.reduce(:+)
       end
     end
   end
