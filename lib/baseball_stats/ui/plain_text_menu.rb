@@ -1,7 +1,7 @@
 module BaseballStats
   module UI
-    class Menu
-      attr_reader :reporters
+    class PlainTextMenu
+      attr_reader :reporters, :printer, :input_device
 
       def initialize(reporters, printer, input_device)
         @reporters    = reporters
@@ -10,11 +10,21 @@ module BaseballStats
       end
 
       def prompt
-        reporters.each do |reporter|
-          printer.write(reporter.menu_name)
+        printer.write(printer.header)
+
+        reporters.each_with_index do |reporter, i|
+          printer.write("#{i + 1}. " << reporter.menu_name)
         end
-        printer.write("Please select from the options above.")
+
+        printer.write("\nPlease select from the options above.")
+
         option = input_device.prompt
+        if reporter = reporters[option.to_i - 1]
+          reporter.prompt(printer, input_device)
+        else
+          printer.write("\nCouldn't recognize that option!")
+          prompt
+        end
       end
     end
   end

@@ -32,7 +32,7 @@ module BaseballStats
 
     private
     def raw_data
-      BaseballStats::Report.raw_data
+      BaseballStats::DataSource.raw_data
     end
 
     def select_from_csv

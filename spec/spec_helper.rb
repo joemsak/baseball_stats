@@ -1,12 +1,12 @@
 require 'csv'
 require 'active_support/all'
-require 'baseball_stats/report'
+require 'baseball_stats/data_source'
 
 module CalculatorTestHelper
   def self.included(base)
     header_row = "playerID,yearID,league,teamID,G,AB,R,H,2B,3B,HR,RBI,SB,CS"
-    base.before { BaseballStats::Report.raw_data = header_row }
-    base.let(:stats) { BaseballStats::Report.raw_data }
+    base.before { BaseballStats::DataSource.raw_data = header_row }
+    base.let(:stats) { BaseballStats::DataSource.raw_data }
   end
 
   def calculator

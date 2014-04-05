@@ -3,6 +3,10 @@ module BaseballStats
     class TripleCrownEligible
       include Reporters
 
+      def self.menu_name
+        "National and American League Triple Crown Eligible by year."
+      end
+
       def header
         "Triple Crown Eligible or Winner for #{year}:"
       end
