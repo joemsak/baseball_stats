@@ -8,7 +8,7 @@ module BaseballStats
 
     def initialize(raw_data)
       @printer = PlainTextPrinter.new
-      @body = "* * * * Baseball Stats Reporter * * * *\n\n"
+      @body = welcome_message
       self.class.raw_data = clean_data_source(raw_data)
     end
 
@@ -25,6 +25,19 @@ module BaseballStats
     end
 
     private
+    def welcome_message
+      <<-EOD
+
+        * * * * * * * * * * * * * * * * * * * *
+        *           Welcome! To the           *
+        *       Baseball Stats Reporter       *
+        *             Play ball!              *
+        *    (well, read about ppl who do)    *
+        * * * * * * * * * * * * * * * * * * * *
+
+      EOD
+    end
+
     def clean_data_source(data)
       data.gsub("\r", "\n").gsub("\n\n", "\n").gsub(',,', ',0,')
     end
