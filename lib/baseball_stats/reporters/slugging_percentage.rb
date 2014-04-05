@@ -10,18 +10,17 @@ module BaseballStats
         @team_id = team_id
       end
 
-      def self.menu_name
-        "Slugging percentage by team and year."
-      end
+      class << self
+        def menu_name
+          "Slugging percentage by team and year."
+        end
 
-      def self.prompt(printer, input_device)
-        printer.write("Please enter the ID of the team you want to see.")
-        team_id = input_device.prompt
-
-        printer.write("Please enter the year you want to see stats for.")
-        year = input_device.prompt.to_i
-
-        report(printer, year, team_id)
+        def prompt(printer, input_device)
+          super do |args|
+            printer.write("Please enter the team ID you want stats for:")
+            args << input_device.prompt
+          end
+        end
       end
 
       def header

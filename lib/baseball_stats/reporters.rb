@@ -12,9 +12,25 @@ module BaseballStats
     end
 
     module ClassMethods
-      def report(printer, *args)
+      attr_reader :printer, :input_device
+
+      def report(*args)
         reporter = self.new(*args)
         printer.write(reporter.body)
+      end
+
+      def prompt(printer, input_device)
+        @printer      = printer
+        @input_device = input_device
+        args          = [prompt_for_year]
+        yield(args) if block_given?
+        report(*args)
+      end
+
+      def prompt_for_year
+        printer.write("Please enter the year you want to find stats for:")
+        year = input_device.prompt
+        year.to_i
       end
 
       def menu_name

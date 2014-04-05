@@ -4,11 +4,11 @@ module BaseballStats
       attr_accessor :raw_data, :name_key
 
       def set_raw_data(filepath)
-        raw_data = read_clean_data(filepath)
+        @raw_data = read_clean_data(filepath)
       end
 
       def set_name_key(filepath)
-        name_key = read_clean_data(filepath)
+        @name_key = read_clean_data(filepath)
       end
 
       private
