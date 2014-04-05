@@ -18,7 +18,13 @@ module BaseballStats
 
         rbi_matches = players.select { |p| p[RBI] == max_RBI }
         hr_matches  = rbi_matches.select { |p| p[HOMERUNS] == max_HR }
-        hr_matches.max_by { |p| batting_average(p) } || { PLAYER_ID => 0 }
+        winner      = hr_matches.max_by { |p| batting_average(p) }
+
+        winner || no_winner
+      end
+
+      def no_winner
+        { PLAYER_ID => 0 }
       end
 
       def batting_average(stats)
