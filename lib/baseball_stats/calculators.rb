@@ -1,6 +1,6 @@
 require 'baseball_stats/calculators/improved_batting_average'
 require 'baseball_stats/calculators/slugging_percentage'
-require 'baseball_stats/calculators/triple_crown_winner'
+require 'baseball_stats/calculators/triple_crown_eligible'
 
 module BaseballStats
   module Calculators

@@ -1,6 +1,6 @@
 module BaseballStats
   module Reporters
-    class TripleCrownWinner
+    class TripleCrownEligible
       include Reporters
 
       def header
@@ -8,7 +8,7 @@ module BaseballStats
       end
 
       def result
-        calc = BaseballStats::Calculators::TripleCrownWinner.new(year)
+        calc = BaseballStats::Calculators::TripleCrownEligible.new(year)
         winners = calc.calculate
         winners.map { |league, player_id|
           name = player_id

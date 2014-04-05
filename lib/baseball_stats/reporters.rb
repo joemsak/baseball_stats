@@ -1,6 +1,6 @@
 require 'baseball_stats/reporters/improved_batting_average'
 require 'baseball_stats/reporters/slugging_percentage'
-require 'baseball_stats/reporters/triple_crown_winner'
+require 'baseball_stats/reporters/triple_crown_eligible'
 
 module BaseballStats
   module Reporters

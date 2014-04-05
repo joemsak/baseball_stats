@@ -30,7 +30,7 @@ module BaseballStats
     end
 
     def reporters
-      triple_crown_reporter = Reporters::TripleCrownWinner
+      triple_crown_reporter = Reporters::TripleCrownEligible
 
       [Reporters::ImprovedBattingAverage.new(2010),
        Reporters::SluggingPercentage.new(2007, 'OAK'),

@@ -1,6 +1,6 @@
 module BaseballStats
   module Calculators
-    class TripleCrownWinner
+    class TripleCrownEligible
       include Calculators
 
       def calculate
