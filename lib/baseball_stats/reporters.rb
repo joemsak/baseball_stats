@@ -18,6 +18,16 @@ module BaseballStats
       raise "Abstract method #result called for #{self.class.name}"
     end
 
+    def body
+      body = header
+      begin
+        body << result << "\n\n"
+      rescue => e
+        body << e.message
+      end
+      body
+    end
+
     private
     def raw_data
       BaseballStats::Report.raw_data

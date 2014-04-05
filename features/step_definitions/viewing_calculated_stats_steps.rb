@@ -1,6 +1,6 @@
 When(/^I display the stats report$/) do
   @report = BaseballStats::Report.new(@stats_csv)
-  @report.display_report
+  @report.report
 end
 
 Then(/^I should see that no stats are available to calculate$/) do

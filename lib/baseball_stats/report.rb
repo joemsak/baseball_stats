@@ -5,16 +5,12 @@ module BaseballStats
       self.class.raw_data = clean_data_source(raw_data)
     end
 
-    def display_report
+    def report
       reporters.each do |reporter|
-        body << reporter.header
-        begin
-          body << reporter.result << "\n\n"
-        rescue => e
-          body << e.message
-        end
+        body << reporter.body
       end
-      printer.print(body)
+
+      printer.write(body)
     end
 
     def body
