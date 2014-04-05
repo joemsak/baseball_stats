@@ -30,10 +30,11 @@ Then(/^I should see there was no winner$/) do
 end
 
 Then(/^I should see the triple crown winners$/) do
-  @report.message.should include "Triple Crown Winners for 2011:"
+  header = "Triple Crown Eligible or Winner for"
+  @report.message.should include "#{header} 2011:"
   @report.message.should include "\nAmerican League: alplaye02"
   @report.message.should include "\nNational League: nlplaye02"
-  @report.message.should include "\nTriple Crown Winners for 2012:"
+  @report.message.should include "\n#{header} 2012:"
   @report.message.should include "\nAmerican League: alplaye02"
   @report.message.should include "\nNational League: nlplaye02"
 end

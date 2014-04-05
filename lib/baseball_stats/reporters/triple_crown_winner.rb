@@ -4,7 +4,7 @@ module BaseballStats
       include Reporters
 
       def header
-        "Triple Crown Winners for #{year}:"
+        "Triple Crown Eligible or Winner for #{year}:"
       end
 
       def result
