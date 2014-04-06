@@ -1,0 +1,3 @@
+#!/usr/bin/env ruby
+require 'baseball_stats'
+BaseballStats.start
