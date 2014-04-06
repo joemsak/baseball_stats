@@ -1,4 +1,5 @@
 require 'baseball_stats'
+require 'fileutils'
 
 BaseballStats::DataSource.name_key = "playerID,birthYear,nameFirst,nameLast"
 BaseballStats::DataSource.name_key << "\naardsda01,1900,Player,One"
@@ -13,6 +14,8 @@ BaseballStats::DataSource.name_key << "\nalplaye02,1900,AL Player,Two"
 BaseballStats::DataSource.name_key << "\nalplaye03,1900,AL Player,Three"
 
 ORIGINAL_STDOUT = $stdout
+
+FileUtils.mkdir_p('tmp') unless File.directory?('tmp')
 $stdout = File.open('./tmp/stdout.txt', 'w+')
 
 at_exit do
