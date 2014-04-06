@@ -7,7 +7,7 @@ module BaseballStats
 
       def initialize(year, team_id)
         super(year)
-        @team_id = team_id
+        @team_id = team_id.strip
       end
 
       class << self
