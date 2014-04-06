@@ -1,29 +1,20 @@
 # BaseballStats
 
-TODO: Write a gem description
+This gem will show you the following stats:
+
+1. Most improved batting average for a player in a given year
+2. The slugging percentage for a given year and team
+3. The Triple Crown Eligible players in each league for a given year
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'stats_reporter'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install stats_reporter
+```bash
+git clone git@github.com/joemsak/the-ol--ballgame
+cd the-old--ballgame
+gem build baseball_stats.gemspec
+gem install baseball_stats-0.0.1.gem
+```
 
 ## Usage
 
-TODO: Write usage instructions here
-
-## Contributing
-
-1. Fork it ( http://github.com/<my-github-username>/stats_reporter/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+run `baseball_stats` after installation, and follow the on-screen instructions
