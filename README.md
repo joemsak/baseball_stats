@@ -9,7 +9,7 @@ This gem will show you the following stats:
 ## Installation
 
 ```bash
-git clone git@github.com/joemsak/the-ol--ballgame.git
+git clone git@github.com/joemsak/baseball_stats.git
 cd the-old--ballgame
 gem build baseball_stats.gemspec
 gem install baseball_stats-0.0.1.gem
