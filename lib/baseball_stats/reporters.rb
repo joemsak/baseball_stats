@@ -32,7 +32,7 @@ module BaseballStats
       end
 
       def prompt_for_year
-        printer.write("Please enter the year you want to find stats for:")
+        printer.write("\nPlease enter the year you want to find stats for:")
         year = input_device.prompt
         year.to_i
       end
@@ -56,9 +56,9 @@ module BaseballStats
     end
 
     def body
-      body = header
+      body = "\n#{header}"
       begin
-        body << result << "\n\n"
+        body << result << "\n"
       rescue => e
         body << e.message
       end
