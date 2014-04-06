@@ -1,5 +1,6 @@
 require 'baseball_stats'
 require 'fileutils'
+require 'rspec/expectations'
 
 BaseballStats::DataSource.name_key = "playerID,birthYear,nameFirst,nameLast"
 BaseballStats::DataSource.name_key << "\naardsda01,1900,Player,One"
@@ -17,6 +18,8 @@ ORIGINAL_STDOUT = $stdout
 
 FileUtils.mkdir_p('tmp') unless File.directory?('tmp')
 $stdout = File.open('./tmp/stdout.txt', 'w+')
+
+World(RSpec::Matchers)
 
 at_exit do
   $stdout = ORIGINAL_STDOUT
