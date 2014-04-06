@@ -1,6 +1,10 @@
 module BaseballStats
   module Reporters
-    attr_accessor :year
+    PLAYER_ID  = Calculators::PLAYER_ID
+    FIRST_NAME = 'nameFirst'
+    LAST_NAME  = 'nameLast'
+
+    attr_accessor :year, :name_key
 
     def self.included(base)
       reporters << base
@@ -12,7 +16,7 @@ module BaseballStats
     end
 
     module ClassMethods
-      attr_reader :printer, :input_device
+      attr_reader :printer, :input_device, :name_key
 
       def report(*args)
         reporter = self.new(*args)
@@ -40,6 +44,7 @@ module BaseballStats
 
     def initialize(year)
       @year = year
+      @name_key = CSV.parse(system_name_key, headers: true)
     end
 
     def header
@@ -58,6 +63,17 @@ module BaseballStats
         body << e.message
       end
       body
+    end
+
+    private
+    def system_name_key
+      BaseballStats::DataSource.name_key
+    end
+
+    def player_name(id)
+      return '(No winner)' if id == 0
+      player = name_key.to_enum.detect { |n| n[PLAYER_ID] == id }
+      [player[FIRST_NAME], player[LAST_NAME]].join(' ')
     end
   end
 end

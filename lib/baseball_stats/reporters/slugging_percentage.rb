@@ -29,7 +29,10 @@ module BaseballStats
 
       def result
         calc = Calculators::SluggingPercentage.new(year, team_id)
-        calc.calculate.map { |id, slg| "\n#{id} - #{slg}" }.join
+        results = calc.calculate.map do |id, slg|
+          "\n#{player_name(id)} - #{slg}"
+        end
+        results.join
       end
     end
   end

@@ -15,8 +15,7 @@ module BaseballStats
         calc = BaseballStats::Calculators::TripleCrownEligible.new(year)
         winners = calc.calculate
         winners.map { |league, player_id|
-          name = player_id
-          name = '(No winner)' if player_id == 0
+          name = player_name(player_id)
           "\n#{league}: #{name}"
         }.join
       end

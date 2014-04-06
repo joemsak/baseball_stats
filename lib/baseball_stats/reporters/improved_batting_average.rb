@@ -13,7 +13,7 @@ module BaseballStats
 
       def result
         calc = Calculators::ImprovedBattingAverage.new(year)
-        calc.calculate
+        player_name(calc.calculate)
       end
     end
   end
