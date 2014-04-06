@@ -21,19 +21,34 @@ module BaseballStats
 
       def run_option(option)
         exit if quitting?(option)
+        option   = option.to_i
+        reporter = reporters[option - 1]
 
-        if reporter = reporters[option.to_i - 1]
+        if reporter && !option.zero?
           reporter.prompt(printer, input_device)
-          prompt_to_start_over_or_quit
         else
           output_unrecognized_option_message
-          prompt_to_start_over_or_quit
         end
+
+        prompt_to_start_over_or_quit
       end
 
       private
       def output_header
-        printer.write(printer.header)
+        printer.write(header)
+      end
+
+      def header
+        <<-EOD
+
+          * * * * * * * * * * * * * * * * * * * *
+          *           Welcome! To the           *
+          *       Baseball Stats Reporter       *
+          *             Play ball!              *
+          *    (well, read about ppl who do)    *
+          * * * * * * * * * * * * * * * * * * * *
+
+        EOD
       end
 
       def output_reporters_options
@@ -56,15 +71,10 @@ module BaseballStats
 
       def prompt_to_start_over_or_quit
         printer.write("\nPress [Enter] to start over, or 'q' to Quit.")
-        selection = input_device.prompt
-        if quitting?(selection)
-          exit
-        elsif selection == "\n"
-          prompt
-        else
-          output_unrecognized_option_message
-          prompt_to_start_over_or_quit
-        end
+        option = input_device.prompt
+        prompt if option == "\n"
+        exit   if quitting?(option)
+        prompt_to_start_over_or_quit
       end
 
       def quitting?(input)
