@@ -19,6 +19,8 @@ gem install baseball_stats-0.0.1.gem
 
 run `baseball_stats` after installation, and follow the on-screen instructions
 
+see https://github.com/joemsak/baseball_stats/blob/master/src/Batting-07-12.csv for how to reference Teams by ID and note that it only has data for 2007 to 2012
+
 ## Testing
 
 Assuming you ran `bundle` run `rake`
